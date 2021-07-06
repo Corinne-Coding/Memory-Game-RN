@@ -6,6 +6,7 @@ import {
   View,
   TouchableOpacity,
   SafeAreaView,
+  Vibration,
 } from "react-native";
 import {
   FontAwesome,
@@ -104,6 +105,7 @@ export default function App() {
   ];
 
   const [cards, setCards] = useState(tab.sort((a, b) => 0.5 - Math.random()));
+  const [strokes, setStrokes] = useState(0);
 
   const handleCards = (index) => {
     const copy = [...cards];
@@ -138,6 +140,7 @@ export default function App() {
 
     // If 2 cards names are the same, set isFound property
     if (revealed.length === 2) {
+      setStrokes(strokes + 1);
       if (revealed[0] === revealed[1]) {
         for (let i = 0; i < copy.length; i++) {
           if (copy[i].name === revealed[0]) {
@@ -161,6 +164,9 @@ export default function App() {
     }
 
     counter /= 2;
+    if (counter === 6) {
+      Vibration.vibrate();
+    }
     return counter;
   };
 
@@ -197,13 +203,27 @@ export default function App() {
         </View>
       </View>
 
-      <View style={[styles.align, styles.btnView]}>
-        <Text style={styles.score}>{countPeers()}</Text>
-        <TouchableOpacity>
+      <View style={[styles.align, styles.btnViewContainer]}>
+        <View style={[styles.align, styles.paddingBottom, styles.btnView]}>
+          <View style={styles.line}>
+            <Text style={styles.dynamicScore}>{countPeers()}</Text>
+            <Text style={styles.score}>/ 6</Text>
+          </View>
+          <Text style={styles.text}>
+            {countPeers() === 1 || countPeers() === 0 ? "peer" : "peers"} found
+          </Text>
+        </View>
+
+        <TouchableOpacity style={[styles.btnView, styles.resetBtn]}>
           <Text style={styles.resetBtnText} onPress={resetGame}>
             Reset
           </Text>
         </TouchableOpacity>
+
+        <View style={[styles.align, styles.btnView]}>
+          <Text style={styles.dynamicStroke}>{strokes}</Text>
+          <Text style={styles.text}>strokes</Text>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -221,6 +241,13 @@ const styles = StyleSheet.create({
   align: {
     alignItems: "center",
     justifyContent: "center",
+  },
+  line: {
+    flexDirection: "row",
+    alignItems: "baseline",
+  },
+  paddingBottom: {
+    paddingBottom: 10,
   },
 
   // Title
@@ -261,21 +288,28 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     borderRadius: 10,
   },
-
   cardVisible: {
     backgroundColor: "white",
   },
-
   cardNotVisible: {
     backgroundColor: "white",
   },
-
   cardFound: {
     backgroundColor: "#4F5D5D",
   },
 
   // Bottom view
-  score: {
+  btnViewContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+  btnView: {
+    flex: 1,
+  },
+  resetBtn: {
+    alignItems: "center",
+  },
+  dynamicScore: {
     fontSize:
       Dimensions.get("window").height > 600
         ? 50
@@ -284,6 +318,25 @@ const styles = StyleSheet.create({
         : 30,
     fontWeight: "bold",
     color: "#FEFEFE",
+  },
+  score: {
+    fontSize:
+      Dimensions.get("window").height > 600
+        ? 20
+        : Dimensions.get("window").height > 500
+        ? 15
+        : 10,
+    fontWeight: "bold",
+    color: "#FEFEFE",
+  },
+  text: {
+    color: "#4F5D5D",
+    fontSize:
+      Dimensions.get("window").height > 600
+        ? 20
+        : Dimensions.get("window").height > 500
+        ? 15
+        : 10,
   },
   resetBtnText: {
     fontWeight: "bold",
@@ -294,6 +347,15 @@ const styles = StyleSheet.create({
         ? 25
         : 20,
     color: "#FEFEFE",
-    marginBottom: 20,
+  },
+  dynamicStroke: {
+    fontSize:
+      Dimensions.get("window").height > 600
+        ? 30
+        : Dimensions.get("window").height > 500
+        ? 25
+        : 20,
+    fontWeight: "bold",
+    color: "#FEFEFE",
   },
 });
