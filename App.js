@@ -1,105 +1,109 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
+  Dimensions,
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
-import { FontAwesome, FontAwesome5, AntDesign } from "@expo/vector-icons";
+import {
+  FontAwesome,
+  FontAwesome5,
+  AntDesign,
+  Entypo,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import Constants from "expo-constants";
+import { StatusBar } from "expo-status-bar";
+
+// Icons
+import { Foundation } from "@expo/vector-icons";
+
+// console.log(Dimensions.get("window").height);
 
 export default function App() {
   const tab = [
     {
-      name: "heart",
+      name: "key",
       isDisplayed: false,
       isFound: false,
-      icon: <FontAwesome name="heart" size={80} color="#D52941" />,
-      opacityIcon: <FontAwesome name="heart" size={80} color="orange" />,
+      icon: <Foundation name="key" size={60} color="black" />,
+    },
+    {
+      name: "key",
+      isDisplayed: false,
+      isFound: false,
+      icon: <Foundation name="key" size={60} color="black" />,
     },
 
     {
-      name: "heart",
+      name: "camera",
       isDisplayed: false,
       isFound: false,
-      icon: <FontAwesome name="heart" size={80} color="#D52941" />,
-      opacityIcon: <FontAwesome name="heart" size={80} color="orange" />,
+      icon: <Foundation name="camera" size={60} color="black" />,
     },
     {
-      name: "star",
+      name: "camera",
       isDisplayed: false,
       isFound: false,
-      icon: <AntDesign name="star" size={80} color="#FFBF0A" />,
-      opacityIcon: <FontAwesome name="star" size={80} color="orange" />,
+      icon: <Foundation name="camera" size={60} color="black" />,
+    },
+
+    {
+      name: "megaphone",
+      isDisplayed: false,
+      isFound: false,
+      icon: <Entypo name="megaphone" size={60} color="black" />,
     },
     {
-      name: "star",
+      name: "megaphone",
       isDisplayed: false,
       isFound: false,
-      icon: <AntDesign name="star" size={80} color="#FFBF0A" />,
-      opacityIcon: <FontAwesome name="star" size={80} color="orange" />,
+      icon: <Entypo name="megaphone" size={60} color="black" />,
+    },
+
+    {
+      name: "headphone",
+      isDisplayed: false,
+      isFound: false,
+      icon: <FontAwesome name="headphones" size={60} color="black" />,
     },
     {
-      name: "tree",
+      name: "headphone",
       isDisplayed: false,
       isFound: false,
-      icon: <FontAwesome name="tree" size={80} color="#86CB33" />,
-      opacityIcon: <FontAwesome5 name="tree" size={80} color="orange" />,
+      icon: <FontAwesome name="headphones" size={60} color="black" />,
+    },
+
+    {
+      name: "pinetree",
+      isDisplayed: false,
+      isFound: false,
+      icon: <MaterialCommunityIcons name="pine-tree" size={60} color="black" />,
     },
     {
-      name: "tree",
+      name: "pinetree",
       isDisplayed: false,
       isFound: false,
-      icon: <FontAwesome name="tree" size={80} color="#86CB33" />,
-      opacityIcon: <FontAwesome5 name="tree" size={80} color="orange" />,
+      icon: <MaterialCommunityIcons name="pine-tree" size={60} color="black" />,
+    },
+
+    {
+      name: "tool",
+      isDisplayed: false,
+      isFound: false,
+      icon: <AntDesign name="tool" size={60} color="black" />,
     },
     {
-      name: "plane",
+      name: "tool",
       isDisplayed: false,
       isFound: false,
-      icon: <FontAwesome name="plane" size={80} color="#7C7C7C" />,
-      opacityIcon: <FontAwesome5 name="plane" size={80} color="orange" />,
-    },
-    {
-      name: "plane",
-      isDisplayed: false,
-      isFound: false,
-      icon: <FontAwesome name="plane" size={80} color="#7C7C7C" />,
-      opacityIcon: <FontAwesome5 name="plane" size={80} color="orange" />,
-    },
-    {
-      name: "leaf",
-      isDisplayed: false,
-      isFound: false,
-      icon: <FontAwesome name="leaf" size={80} color="#664236" />,
-      opacityIcon: <FontAwesome5 name="leaf" size={80} color="orange" />,
-    },
-    {
-      name: "leaf",
-      isDisplayed: false,
-      isFound: false,
-      icon: <FontAwesome name="leaf" size={80} color="#664236" />,
-      opacityIcon: <FontAwesome5 name="leaf" size={80} color="orange" />,
-    },
-    {
-      name: "fish",
-      isDisplayed: false,
-      isFound: false,
-      icon: <FontAwesome5 name="fish" size={80} color="#1C2DC0" />,
-      opacityIcon: <FontAwesome5 name="fish" size={80} color="orange" />,
-    },
-    {
-      name: "fish",
-      isDisplayed: false,
-      isFound: false,
-      icon: <FontAwesome5 name="fish" size={80} color="#1C2DC0" />,
-      opacityIcon: <FontAwesome5 name="fish" size={80} color="orange" />,
+      icon: <AntDesign name="tool" size={60} color="black" />,
     },
   ];
 
   const [cards, setCards] = useState(tab.sort((a, b) => 0.5 - Math.random()));
-  const [peerFound, setPeerFound] = useState(0);
 
   const handleCards = (index) => {
     const copy = [...cards];
@@ -132,16 +136,12 @@ export default function App() {
       }
     }
 
-    // console.log(revealed);
-
+    // If 2 cards names are the same, set isFound property
     if (revealed.length === 2) {
-      console.log("LA");
       if (revealed[0] === revealed[1]) {
-        console.log("ICI");
         for (let i = 0; i < copy.length; i++) {
           if (copy[i].name === revealed[0]) {
             copy[i].isFound = true;
-            console.log(copy[i].name);
           }
         }
       }
@@ -150,45 +150,71 @@ export default function App() {
     setCards(copy);
   };
 
+  const countPeers = () => {
+    let counter = 0;
+
+    // Count how many cards are found
+    for (let i = 0; i < cards.length; i++) {
+      if (cards[i].isFound) {
+        counter++;
+      }
+    }
+
+    counter /= 2;
+    return counter;
+  };
+
+  const resetGame = () => {
+    setCards(tab.sort((a, b) => 0.5 - Math.random()));
+  };
+
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar style="light" />
       <Text style={styles.title}>Memory Game</Text>
-      <View style={styles.cardsContainer}>
-        {cards.map((card, index) => {
-          return (
-            <TouchableOpacity
-              key={index}
-              style={styles.card}
-              onPress={() => {
-                handleCards(index);
-              }}
-            >
-              {card.isDisplayed && !card.isFound ? (
-                card.icon
-              ) : card.isDisplayed && card.isFound ? (
-                card.opacityIcon
-              ) : (
-                <FontAwesome5 name="question" size={80} color="black" />
-              )}
-            </TouchableOpacity>
-          );
-        })}
+
+      <View style={styles.test}>
+        <View style={styles.cardsContainer}>
+          {cards.map((card, index) => {
+            return (
+              <TouchableOpacity
+                key={index}
+                style={
+                  card.isDisplayed && !card.isFound
+                    ? [styles.card, styles.cardVisible]
+                    : card.isDisplayed && card.isFound
+                    ? [styles.card, styles.cardFound]
+                    : [styles.card, styles.cardNotVisible]
+                }
+                onPress={() => {
+                  handleCards(index);
+                }}
+              >
+                {card.isDisplayed ? card.icon : null}
+              </TouchableOpacity>
+            );
+          })}
+        </View>
       </View>
 
       <View style={[styles.align, styles.btnView]}>
-        <Text style={styles.score}>{peerFound}</Text>
+        <Text style={styles.score}>{countPeers()}</Text>
         <TouchableOpacity>
-          <Text style={styles.resetBtnText}>Reset</Text>
+          <Text style={styles.resetBtnText} onPress={resetGame}>
+            Reset
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 }
 
+// Design is inspired of "Dinosaur memory game" of Guilherme Zühlke O'Connor on Dribbble (https://dribbble.com/guioconnor)
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#223333",
     paddingTop: Constants.statusBarHeight,
     justifyContent: "space-between",
   },
@@ -196,38 +222,78 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
+  // Title
+  title: {
+    fontSize:
+      Dimensions.get("window").height > 600
+        ? 30
+        : Dimensions.get("window").height > 500
+        ? 25
+        : 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#FEFEFE",
+    paddingVertical: 10,
+  },
+
+  // Cards
   cardsContainer: {
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
     flexWrap: "wrap",
   },
+
   card: {
-    height: "18%",
+    height:
+      Dimensions.get("window").height > 700
+        ? 120
+        : Dimensions.get("window").height > 600
+        ? 100
+        : Dimensions.get("window").height > 500
+        ? 80
+        : 60,
     width: "25%",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 30,
+    marginVertical: 10,
     marginHorizontal: 10,
     borderRadius: 10,
   },
-  resetBtnText: {
-    color: "#1894F9",
-    fontWeight: "bold",
-    fontSize: 20,
-    color: "#050927",
+
+  cardVisible: {
+    backgroundColor: "white",
   },
-  title: {
-    fontSize: 30,
-    fontWeight: "bold",
-    textAlign: "center",
-    color: "#050927",
+
+  cardNotVisible: {
+    backgroundColor: "white",
   },
+
+  cardFound: {
+    backgroundColor: "#4F5D5D",
+  },
+
+  // Bottom view
   score: {
-    fontSize: 60,
+    fontSize:
+      Dimensions.get("window").height > 600
+        ? 50
+        : Dimensions.get("window").height > 500
+        ? 40
+        : 30,
     fontWeight: "bold",
+    color: "#FEFEFE",
   },
-  btnView: {
+  resetBtnText: {
+    fontWeight: "bold",
+    fontSize:
+      Dimensions.get("window").height > 600
+        ? 30
+        : Dimensions.get("window").height > 500
+        ? 25
+        : 20,
+    color: "#FEFEFE",
     marginBottom: 20,
   },
 });
