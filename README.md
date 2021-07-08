@@ -7,7 +7,7 @@
 <br />
 
 <p align="center">
-<img width="200" alt="Memory game project" src="" />
+<img width="200" alt="Memory game project" src="https://github.com/Corinne-Coding/Memory-Game-RN/blob/main/assets/preview/memory-game.gif" />
 </p>
 
 <p align="center">A memory game mobile application built with <strong>Expo</strong>.</p>
@@ -25,7 +25,7 @@ Scan the QRCode with Expo Go to try my project : <a href="https://expo.io/@corin
 The Memory Game project is a simple **frontend** mobile project made in 2021.
 
 <p align="center">
-<img width="200" alt="Memory game project" src="https://github.com/Corinne-Coding/Memory-Game-RN/blob/main/assets/preview/memory-game-01.png" />
-<img width="200" alt="Memory game project" src="https://github.com/Corinne-Coding/Memory-Game-RN/blob/main/assets/preview/memory-game-02.png" />
-<img width="200" alt="Memory game project" src="https://github.com/Corinne-Coding/Memory-Game-RN/blob/main/assets/preview/memory-game-03.png" />
+<img width="300" alt="Memory game project" src="https://github.com/Corinne-Coding/Memory-Game-RN/blob/main/assets/preview/memory-game-01.png" />
+<img width="300" alt="Memory game project" src="https://github.com/Corinne-Coding/Memory-Game-RN/blob/main/assets/preview/memory-game-02.png" />
+<img width="300" alt="Memory game project" src="https://github.com/Corinne-Coding/Memory-Game-RN/blob/main/assets/preview/memory-game-03.png" />
 </p>
