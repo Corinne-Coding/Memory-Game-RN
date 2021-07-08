@@ -8,20 +8,17 @@ import {
   SafeAreaView,
   Vibration,
 } from "react-native";
-import {
-  FontAwesome,
-  FontAwesome5,
-  AntDesign,
-  Entypo,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
 
 // Icons
-import { Foundation } from "@expo/vector-icons";
-
-// console.log(Dimensions.get("window").height);
+import {
+  Foundation,
+  FontAwesome,
+  AntDesign,
+  Entypo,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 
 export default function App() {
   const tab = [
@@ -156,7 +153,6 @@ export default function App() {
   const countPeers = () => {
     let counter = 0;
 
-    // Count how many cards are found
     for (let i = 0; i < cards.length; i++) {
       if (cards[i].isFound) {
         counter++;
@@ -172,6 +168,7 @@ export default function App() {
 
   const resetGame = () => {
     setCards(tab.sort((a, b) => 0.5 - Math.random()));
+    setStrokes(0);
   };
 
   return (
@@ -230,8 +227,6 @@ export default function App() {
     </SafeAreaView>
   );
 }
-
-// Design is inspired of "Dinosaur memory game" of Guilherme Zühlke O'Connor on Dribbble (https://dribbble.com/guioconnor)
 
 const styles = StyleSheet.create({
   container: {
