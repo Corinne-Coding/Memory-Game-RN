@@ -222,7 +222,9 @@ export default function App() {
 
         <View style={[styles.align, styles.btnView]}>
           <Text style={styles.dynamicStroke}>{strokes}</Text>
-          <Text style={styles.text}>strokes</Text>
+          <Text style={styles.text}>
+            {strokes === 0 || strokes === 1 ? "stroke" : "strokes"}
+          </Text>
         </View>
       </View>
     </SafeAreaView>
